@@ -1,10 +1,19 @@
 import express from 'express';
+import { Kafka } from 'kafkajs'
 
 const app = express();
 
-app.get('/certifications', (req, res) => {
-    // chamar micro servico
-    return res.json({ ok: true })
+const kafka = new Kafka({
+    clientId: 'api', // identificador 
+    brokers: ['kafka:9092'] // instancia do kafka // ele usou docker (?) 31:11
 })
 
-app.listen(3333)
+async function run() {
+    await producer.connect();
+    
+    app.listen(3333)
+}
+
+run().catch(console.error);
+
+const producer = kafka.producer()
