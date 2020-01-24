@@ -19,7 +19,6 @@ const producer = kafka.producer()
  */
 app.use((req, res, next) => {
     req.producer = producer;
-
     return next()
 })
 
@@ -29,7 +28,7 @@ app.use((req, res, next) => {
 app.use(routes)
 
 async function run() {
-    //await producer.connect();
+    await producer.connect();
 
     app.listen(3333)
 }
